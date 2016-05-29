@@ -31,10 +31,10 @@ namespace Pharmacy
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+
+
+        void search(object sender, EventArgs e)
         {
-
-
             string searchKey = textBox1.Text;
 
 
@@ -45,11 +45,13 @@ namespace Pharmacy
             {
                 dataGridView1.Rows.Add();
                 int rows = dataGridView1.RowCount - 1;
-                System.Diagnostics.Debug.WriteLine(rows);
                 dataGridView1.Rows[rows].Cells[0].Value = i.getName();
                 dataGridView1.Rows[rows].Cells[1].Value = i.getTelephoneNumber();
-            }
+                dataGridView1.Rows[rows].HeaderCell.Value = i.getID();
 
+
+
+            }
 
         }
 
@@ -78,6 +80,35 @@ namespace Pharmacy
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new Send_sms().ShowDialog();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count < 1)//if no rows selected
+            {
+                MessageBox.Show("Select a row");
+                return;
+            }
+
+            foreach (DataGridViewRow item in dataGridView1.SelectedRows)//delete all selected rows
+            {
+
+                int customerID = (int)item.HeaderCell.Value;
+                customerDao.deleteCustomer(customerID);
+                dataGridView1.Rows.RemoveAt(item.Index);
+            }
+        }
+
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+            search(sender, e);
         }
     }
 }

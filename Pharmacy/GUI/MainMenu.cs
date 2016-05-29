@@ -256,17 +256,19 @@ namespace Pharmacy
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo) == DialogResult.No)
-            {
-                return;
-            }
-
 
             if (listBox1.SelectedIndex == -1)
             {
                 MessageBox.Show("Select an item first!");
                 return;
             }
+            if (MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                return;
+            }
+
+
+           
             productDao.deleteProduct(tempSelectedProduct);
 
 

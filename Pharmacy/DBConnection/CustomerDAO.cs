@@ -94,9 +94,48 @@ namespace Pharmacy
             
             return customerList;
         }
-            
-        
 
+
+
+
+
+
+        public void deleteCustomer(int customerID)
+        {
+
+            System.Diagnostics.Debug.WriteLine(customerID);
+            try
+            {
+
+                conn.Open();
+                string query = "delete from customer where customerID = @customerID";
+
+
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+
+                cmd.Parameters.AddWithValue("customerID", customerID);
+
+
+                cmd.ExecuteNonQuery();
+
+
+
+
+            }
+            catch (MySqlException ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Something went wrong in Deletecustomer method...");
+
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+        }
 
 
 
