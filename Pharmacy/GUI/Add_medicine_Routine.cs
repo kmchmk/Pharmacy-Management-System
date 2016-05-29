@@ -6,7 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
+using Telerivet.Client;
 
 namespace Pharmacy
 {
@@ -16,6 +18,16 @@ namespace Pharmacy
         CustomerDAO customerDao;
         DAO dao;
         Send_sms send_sms;
+
+
+        string apiKey = "17SdmOculXGRr0ggJ8A7gV9qbiL06Hq6";
+        string projectID = "PJfe487b37facfa08c";
+        string number = "0717899366";
+
+
+
+
+
         public Add_medicine_Routine(Send_sms send_sms)
         {
             InitializeComponent();
@@ -37,7 +49,7 @@ namespace Pharmacy
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //System.Diagnostics.Debug.WriteLine(dateTimePicker1.Value);
+
             //Add data to the database
 
             string medicineName = textBox1.Text;
@@ -54,13 +66,26 @@ namespace Pharmacy
             int lunch = 0;
             int dinner = 0;
             int hours = 0;
+            int times = 0;
             DateTime? time = null;
 
 
             if (radioButton0.Checked)
             {
 
+
                 how = 1;
+
+                try
+                {
+                    times = int.Parse(comboBox2.SelectedItem.ToString());
+                }
+                catch (NullReferenceException ex)
+                {
+                    MessageBox.Show("Select how many times");
+                    return;
+                }
+
 
                 if (checkBox1.Checked)
                 {
@@ -83,6 +108,72 @@ namespace Pharmacy
                 {
                     beforeOrAfter = 2;
                 }
+
+
+
+
+
+
+
+                new Thread(() =>
+                {
+                    Thread.CurrentThread.IsBackground = true;
+
+
+                    int i = 0;
+                    int days = 0;
+                    while (i < times)
+                    {
+
+
+                        if (breakfast == 1 & i < times)
+                        {
+                            string dateTime = ((Int32)((DateTime.UtcNow.Date.AddDays(days) + new TimeSpan(7, 0, 0)).Subtract(new DateTime(1970, 1, 1, 5, 30, 0))).TotalSeconds).ToString();
+                            string content = send_sms.getCustomerName() + ", You have to take " + medicineName + " now (" + (DateTime.UtcNow.Date.AddDays(days) + new TimeSpan(7, 0, 0)) + ").\n-Pharmacy-";
+                            System.Diagnostics.Debug.WriteLine(content);
+                            i++;
+                            new TelerivetClass().schedule(apiKey, projectID, send_sms.getCustomerPhoneNumber(), dateTime, content);
+                        }
+
+                        if (lunch == 1 & i < times)
+                        {
+
+                            string dateTime = ((Int32)((DateTime.UtcNow.Date.AddDays(days) + new TimeSpan(12, 0, 0)).Subtract(new DateTime(1970, 1, 1, 5, 30, 0))).TotalSeconds).ToString();
+                            string content = send_sms.getCustomerName() + ", You have to take " + medicineName + " now (" + (DateTime.UtcNow.Date.AddDays(days) + new TimeSpan(12, 0, 0)) + ").\n-Pharmacy-";
+                            System.Diagnostics.Debug.WriteLine(content);
+                            i++;
+                            new TelerivetClass().schedule(apiKey, projectID, send_sms.getCustomerPhoneNumber(), dateTime, content);
+                        } 
+
+
+                        if (dinner == 1 & i < times)
+                        {
+                            string dateTime = ((Int32)((DateTime.UtcNow.Date.AddDays(days) + new TimeSpan(19, 0, 0)).Subtract(new DateTime(1970, 1, 1, 5, 30, 0))).TotalSeconds).ToString();
+                            string content = send_sms.getCustomerName() + ", You have to take " + medicineName + " now (" + (DateTime.UtcNow.Date.AddDays(days) + new TimeSpan(19, 0, 0)) + ").\n-Pharmacy-";
+                            System.Diagnostics.Debug.WriteLine(content);
+                            i++;
+                            new TelerivetClass().schedule(apiKey, projectID, send_sms.getCustomerPhoneNumber(), dateTime, content);
+                        }
+
+
+
+
+
+                        days++;
+
+
+                    }
+
+                }).Start();
+
+
+
+
+
+
+
+
+
             }
 
             else if (radioButton1.Checked)
@@ -97,19 +188,63 @@ namespace Pharmacy
                     MessageBox.Show("Select the number of hours");
                     return;
                 }
+
+
+                try
+                {
+                    times = int.Parse(comboBox2.SelectedItem.ToString());
+                }
+                catch (NullReferenceException ex)
+                {
+                    MessageBox.Show("Select how many times");
+                    return;
+                }
+
+
+
+
+                new Thread(() =>
+                {
+                    Thread.CurrentThread.IsBackground = true;
+
+                    for (int i = 0; i < times; i++)
+                    {
+
+                        string dateTime = ((Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds + (i * 3600 * hours) + 600).ToString();
+                        string content = send_sms.getCustomerName() + ",\nYou have to take " + medicineName + " now (" + DateTime.UtcNow.AddSeconds((i * 3600 * hours) + 600).AddHours(5.5) + ").\n-Pharmacy-";
+
+
+
+                        new TelerivetClass().schedule(apiKey, projectID, send_sms.getCustomerPhoneNumber(), dateTime, content);
+                    }
+
+                }).Start();
+
+
+
             }
 
             else if (radioButton2.Checked)
             {
                 how = 3;
                 time = dateTimePicker1.Value;
+                new Thread(() =>
+                {
+                    Thread.CurrentThread.IsBackground = true;
+                    string dateTime = (dateTimePicker1.Value.Subtract(new DateTime(1970, 1, 1, 5, 30, 0))).TotalSeconds.ToString();
+
+                    string content = send_sms.getCustomerName() + ",\nYou have to take " + medicineName + " now (" + time + ").\n-Pharmacy-";
+
+
+
+                    new TelerivetClass().schedule(apiKey, projectID, send_sms.getCustomerPhoneNumber(), dateTime, content);
+                }).Start();
+
+
             }
 
 
-
-
-
-            routingDao.addRouting(new Routing(send_sms.getCustomerID(), medicineName, how, breakfast, lunch, dinner, beforeOrAfter, hours, time));
+            routingDao.addRouting(new Routing(send_sms.getCustomerID(), medicineName, how, breakfast, lunch, dinner, beforeOrAfter, hours, times, time));
 
 
 
@@ -119,7 +254,5 @@ namespace Pharmacy
 
 
         }
-
-
     }
 }

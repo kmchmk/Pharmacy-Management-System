@@ -36,6 +36,17 @@ namespace Pharmacy
             return this.customerID;
         }
 
+        public string getCustomerName()
+        {
+            return textBox1.Text;
+        }
+        public string getCustomerPhoneNumber()
+        {
+            return textBox2.Text;
+        }
+
+
+
         private void button4_Click(object sender, EventArgs e)
         {
 

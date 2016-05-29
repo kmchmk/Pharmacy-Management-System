@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Net.NetworkInformation;
+using Telerivet.Client;
 
 namespace Pharmacy
 {
@@ -276,7 +277,16 @@ namespace Pharmacy
         {
 
 
+           // System.Diagnostics.Debug.WriteLine(DateTime.UtcNow.Date + new TimeSpan(7, 0, 0));
 
+
+            
+            
+                string dateTime = ((Int32)((DateTime.UtcNow.Date + new TimeSpan(7, 0, 0)).Subtract(new DateTime(1970, 1, 1))).TotalSeconds).ToString();
+                string content = "send_sms.getCustomerName()" + ",\nYou have to take " + "medicineName" + " now (" + (DateTime.UtcNow.Date + new TimeSpan(7, 0, 0)) + ").\n-Pharmacy-";
+                System.Diagnostics.Debug.WriteLine(content);
+              //new TelerivetClass().schedule(apiKey, projectID, send_sms.getCustomerPhoneNumber(), dateTime, content);
+            
 
 
 
@@ -374,6 +384,17 @@ namespace Pharmacy
         private void customersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new ViewCustomers().Show();
+        }
+
+        private void button2_Click_3(object sender, EventArgs e)
+        {
+            string apiKey = "17SdmOculXGRr0ggJ8A7gV9qbiL06Hq6";
+            string projectID = "PJfe487b37facfa08c";
+            string number = "0717899366";
+            string content = textBox1.Text;
+
+            TelerivetClass testclass = new TelerivetClass();
+            //testclass.sendSMS(apiKey, projectID, content, number);
         }
 
     }

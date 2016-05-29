@@ -12,10 +12,11 @@ namespace Pharmacy
         int dinner;
         int beforeOrAfter;
         int hours;
+        int times;
         DateTime? time;
 
 
-        public Routing(int customerID, string medicineName, int how, int breakfast, int lunch, int dinner, int beforeOrAfter, int hours, DateTime? time)
+        public Routing(int customerID, string medicineName, int how, int breakfast, int lunch, int dinner, int beforeOrAfter, int hours, int times, DateTime? time)
         {
             this.customerID = customerID;
             this.medicineName = medicineName;
@@ -25,6 +26,7 @@ namespace Pharmacy
             this.dinner = dinner;
             this.beforeOrAfter = beforeOrAfter;
             this.hours = hours;
+            this.times = times;
             this.time = time;
         }
 
@@ -44,6 +46,8 @@ namespace Pharmacy
         public void setBeforeOrAfter(int BeforeOrAfter) { this.beforeOrAfter = BeforeOrAfter; }
         public int getHours() { return hours; }
         public void setHours(int hours) { this.hours = hours; }
+        public int getTimes() { return times; }
+        public void setTimes(int times) { this.times = times; }
         public DateTime? getTime() { return time; }
         public void setTime(DateTime? time) { this.time = time; }
 

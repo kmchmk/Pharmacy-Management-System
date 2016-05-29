@@ -31,7 +31,7 @@ namespace Pharmacy
             {
 
                 conn.Open();
-                string query = "INSERT INTO routing (customerID, medicineName, how, breakfast, lunch, dinner, beforeOrAfter, hours, time) VALUES (@customerID, @medicineName, @how, @breakfast, @lunch, @dinner, @beforeOrAfter, @hours, @time)";
+                string query = "INSERT INTO routing (customerID, medicineName, how, breakfast, lunch, dinner, beforeOrAfter, hours,times, time) VALUES (@customerID, @medicineName, @how, @breakfast, @lunch, @dinner, @beforeOrAfter, @hours, @times, @time)";
 
 
 
@@ -46,6 +46,7 @@ namespace Pharmacy
                 cmd.Parameters.AddWithValue("dinner", routing.getDinner());
                 cmd.Parameters.AddWithValue("beforeOrAfter", routing.getBeforeOrAfter());
                 cmd.Parameters.AddWithValue("hours", routing.getHours());
+                cmd.Parameters.AddWithValue("times", routing.getTimes());
                 cmd.Parameters.AddWithValue("time", routing.getTime());
 
 
@@ -80,7 +81,7 @@ namespace Pharmacy
             try
             {
                 conn.Open();
-                string query = "select customerID, medicineName, how, breakfast, lunch, dinner, beforeOrAfter, hours, time from routing where routing.customerID = @customerID";
+                string query = "select customerID, medicineName, how, breakfast, lunch, dinner, beforeOrAfter, hours,times, time from routing where routing.customerID = @customerID";
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("customerID", customerID);
                 MySqlDataReader result = cmd.ExecuteReader();
@@ -88,7 +89,7 @@ namespace Pharmacy
                 {
 
                     // System.Diagnostics.Debug.WriteLine(result.GetString(1));//To avoid null exceptions
-                    routingList.Add(new Routing(result.GetInt32(0), result.GetString(1), result.GetInt32(2), result.GetInt32(3), result.GetInt32(4), result.GetInt32(5), result.GetInt32(6), result.GetInt32(7), result[8] as DateTime?));
+                    routingList.Add(new Routing(result.GetInt32(0), result.GetString(1), result.GetInt32(2), result.GetInt32(3), result.GetInt32(4), result.GetInt32(5), result.GetInt32(6), result.GetInt32(7),result.GetInt32(8), result[9] as DateTime?));
                 }
                 //System.Diagnostics.Debug.WriteLine(result);
 
