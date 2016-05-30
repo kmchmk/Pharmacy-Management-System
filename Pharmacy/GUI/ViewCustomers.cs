@@ -95,13 +95,18 @@ namespace Pharmacy
                 return;
             }
 
-            foreach (DataGridViewRow item in dataGridView1.SelectedRows)//delete all selected rows
+            else if (MessageBox.Show("Are you sure", "Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
+                foreach (DataGridViewRow item in dataGridView1.SelectedRows)//delete all selected rows
+                {
 
-                int customerID = (int)item.HeaderCell.Value;
-                customerDao.deleteCustomer(customerID);
-                dataGridView1.Rows.RemoveAt(item.Index);
+                    int customerID = (int)item.HeaderCell.Value;
+                    customerDao.deleteCustomer(customerID);
+                    dataGridView1.Rows.RemoveAt(item.Index);
+                }
             }
+
+            
         }
 
 

@@ -196,7 +196,6 @@ namespace Pharmacy
                 return;
             }
             int row = dataGridView1.RowCount;
-            System.Diagnostics.Debug.WriteLine(row);
             int quantity = Int32.Parse(comboBox1.Text);
             dataGridView1.Rows.Add();
             dataGridView1.Height = dataGridView1.Height + dataGridView1.Rows[row].Height;
@@ -268,7 +267,7 @@ namespace Pharmacy
             }
 
 
-           
+
             productDao.deleteProduct(tempSelectedProduct);
 
 
@@ -279,16 +278,16 @@ namespace Pharmacy
         {
 
 
-           // System.Diagnostics.Debug.WriteLine(DateTime.UtcNow.Date + new TimeSpan(7, 0, 0));
+            System.Diagnostics.Debug.WriteLine(DateTime.UtcNow.Date + new TimeSpan(7, 0, 0) > DateTime.UtcNow);
+
+            System.Diagnostics.Debug.WriteLine(DateTime.UtcNow);
+            System.Diagnostics.Debug.WriteLine(DateTime.Now);
 
 
-            
-            
-                string dateTime = ((Int32)((DateTime.UtcNow.Date + new TimeSpan(7, 0, 0)).Subtract(new DateTime(1970, 1, 1))).TotalSeconds).ToString();
-                string content = "send_sms.getCustomerName()" + ",\nYou have to take " + "medicineName" + " now (" + (DateTime.UtcNow.Date + new TimeSpan(7, 0, 0)) + ").\n-Pharmacy-";
-                System.Diagnostics.Debug.WriteLine(content);
-              //new TelerivetClass().schedule(apiKey, projectID, send_sms.getCustomerPhoneNumber(), dateTime, content);
-            
+
+
+
+
 
 
 
@@ -399,5 +398,13 @@ namespace Pharmacy
             //testclass.sendSMS(apiKey, projectID, content, number);
         }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow item in dataGridView1.SelectedRows)
+            {
+                dataGridView1.Rows.Remove(item);
+            }
+            calculateTotal();
+        }
     }
 }

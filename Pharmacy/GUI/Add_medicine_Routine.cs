@@ -111,62 +111,37 @@ namespace Pharmacy
 
 
 
-
-
-
-
-                new Thread(() =>
+                int i = 0;
+                int days = 0;
+                while (i < times)
                 {
-                    Thread.CurrentThread.IsBackground = true;
+
+                    DateTime now = DateTime.Now;
+
+                    DateTime tempTime = now.AddDays(days);
 
 
-                    int i = 0;
-                    int days = 0;
-                    while (i < times)
+                    //shedule smses
+                    if (breakfast == 1 & i < times & (tempTime.Date + new TimeSpan(7, 0, 0) > now))
                     {
-
-
-                        if (breakfast == 1 & i < times)
-                        {
-                            string dateTime = ((Int32)((DateTime.UtcNow.Date.AddDays(days) + new TimeSpan(7, 0, 0)).Subtract(new DateTime(1970, 1, 1, 5, 30, 0))).TotalSeconds).ToString();
-                            string content = send_sms.getCustomerName() + ", You have to take " + medicineName + " now (" + (DateTime.UtcNow.Date.AddDays(days) + new TimeSpan(7, 0, 0)) + ").\n-Pharmacy-";
-                            System.Diagnostics.Debug.WriteLine(content);
-                            i++;
-                            new TelerivetClass().schedule(apiKey, projectID, send_sms.getCustomerPhoneNumber(), dateTime, content);
-                        }
-
-                        if (lunch == 1 & i < times)
-                        {
-
-                            string dateTime = ((Int32)((DateTime.UtcNow.Date.AddDays(days) + new TimeSpan(12, 0, 0)).Subtract(new DateTime(1970, 1, 1, 5, 30, 0))).TotalSeconds).ToString();
-                            string content = send_sms.getCustomerName() + ", You have to take " + medicineName + " now (" + (DateTime.UtcNow.Date.AddDays(days) + new TimeSpan(12, 0, 0)) + ").\n-Pharmacy-";
-                            System.Diagnostics.Debug.WriteLine(content);
-                            i++;
-                            new TelerivetClass().schedule(apiKey, projectID, send_sms.getCustomerPhoneNumber(), dateTime, content);
-                        } 
-
-
-                        if (dinner == 1 & i < times)
-                        {
-                            string dateTime = ((Int32)((DateTime.UtcNow.Date.AddDays(days) + new TimeSpan(19, 0, 0)).Subtract(new DateTime(1970, 1, 1, 5, 30, 0))).TotalSeconds).ToString();
-                            string content = send_sms.getCustomerName() + ", You have to take " + medicineName + " now (" + (DateTime.UtcNow.Date.AddDays(days) + new TimeSpan(19, 0, 0)) + ").\n-Pharmacy-";
-                            System.Diagnostics.Debug.WriteLine(content);
-                            i++;
-                            new TelerivetClass().schedule(apiKey, projectID, send_sms.getCustomerPhoneNumber(), dateTime, content);
-                        }
-
-
-
-
-
-                        days++;
-
-
+                        sheduleWithMealSMS(7, days, medicineName);
+                        i++;
                     }
 
-                }).Start();
+                    if (lunch == 1 & i < times & (tempTime.Date + new TimeSpan(12, 0, 0) > now))
+                    {
+                        sheduleWithMealSMS(12, days, medicineName);
+                        i++;
+                    }
 
+                    if (dinner == 1 & i < times & (tempTime.Date + new TimeSpan(19, 0, 0) > now))
+                    {
+                        sheduleWithMealSMS(19, days, medicineName);
+                        i++;
+                    }
 
+                    days++;
+                }
 
 
 
@@ -251,6 +226,25 @@ namespace Pharmacy
 
             send_sms.populateTable(dao.getLastInsertedAutoIncrementedID());
             this.Dispose();
+
+
+        }
+
+
+        void sheduleWithMealSMS(int clock, int days, string medicineName)
+        {
+            new Thread(() =>
+            {
+                Thread.CurrentThread.IsBackground = true;
+
+                string dateTime = ((Int32)((DateTime.UtcNow.Date.AddDays(days) + new TimeSpan(clock, 0, 0)).Subtract(new DateTime(1970, 1, 1, 5, 30, 0))).TotalSeconds).ToString();
+                string content = send_sms.getCustomerName() + ", You have to take " + medicineName + " now (" + (DateTime.UtcNow.Date.AddDays(days) + new TimeSpan(clock, 0, 0)) + ").\n-Pharmacy-";
+                System.Diagnostics.Debug.WriteLine(content);
+                new TelerivetClass().schedule(apiKey, projectID, send_sms.getCustomerPhoneNumber(), dateTime, content);
+
+            }).Start();
+
+
 
 
         }

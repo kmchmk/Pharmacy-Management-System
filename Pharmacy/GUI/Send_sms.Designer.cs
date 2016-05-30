@@ -33,13 +33,12 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Medicine = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.routine = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.Medicine = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,31 +79,17 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Medicine,
-            this.routine});
+            this.Medicine});
             this.dataGridView1.Location = new System.Drawing.Point(295, 12);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(240, 166);
+            this.dataGridView1.Size = new System.Drawing.Size(193, 166);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.Visible = false;
             // 
-            // Medicine
-            // 
-            this.Medicine.HeaderText = "Medicine";
-            this.Medicine.Name = "Medicine";
-            this.Medicine.ReadOnly = true;
-            this.Medicine.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // routine
-            // 
-            this.routine.HeaderText = "Routing";
-            this.routine.Name = "routine";
-            this.routine.ReadOnly = true;
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(541, 33);
+            this.button1.Location = new System.Drawing.Point(494, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 5;
@@ -115,19 +100,20 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(107, 155);
+            this.button2.Location = new System.Drawing.Point(494, 155);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(65, 23);
+            this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 6;
             this.button2.Text = "OK";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(178, 155);
+            this.button3.Location = new System.Drawing.Point(142, 155);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(64, 23);
+            this.button3.Size = new System.Drawing.Size(100, 23);
             this.button3.TabIndex = 7;
             this.button3.Text = "Cancel";
             this.button3.UseVisualStyleBackColor = true;
@@ -137,7 +123,7 @@
             // 
             this.button4.Location = new System.Drawing.Point(26, 155);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.Size = new System.Drawing.Size(102, 23);
             this.button4.TabIndex = 8;
             this.button4.Text = "Add Routing";
             this.button4.UseVisualStyleBackColor = true;
@@ -145,7 +131,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(541, 62);
+            this.button5.Location = new System.Drawing.Point(494, 41);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 22);
             this.button5.TabIndex = 9;
@@ -154,13 +140,21 @@
             this.button5.Visible = false;
             this.button5.Click += new System.EventHandler(this.button5_Click_1);
             // 
+            // Medicine
+            // 
+            this.Medicine.HeaderText = "Medicine";
+            this.Medicine.Name = "Medicine";
+            this.Medicine.ReadOnly = true;
+            this.Medicine.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Medicine.Width = 150;
+            // 
             // Send_sms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(626, 192);
+            this.ClientSize = new System.Drawing.Size(574, 192);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -191,8 +185,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Medicine;
-        private System.Windows.Forms.DataGridViewTextBoxColumn routine;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Medicine;
     }
 }

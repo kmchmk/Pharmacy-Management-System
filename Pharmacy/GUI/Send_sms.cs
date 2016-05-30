@@ -78,6 +78,7 @@ namespace Pharmacy
             dataGridView1.Show();
             button1.Show();
             button5.Show();
+            button2.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -87,7 +88,7 @@ namespace Pharmacy
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            this.Dispose();
         }
 
 
@@ -108,7 +109,6 @@ namespace Pharmacy
             dataGridView1.Rows.Add();
 
             dataGridView1.Rows[lastRouting].Cells[0].Value = routingList[lastRouting].getMedicineName();
-            dataGridView1.Rows[lastRouting].Cells[1].Value = routingList[lastRouting].getHow();
             dataGridView1.Rows[lastRouting].HeaderCell.Value = lastInsertedID;
 
 
