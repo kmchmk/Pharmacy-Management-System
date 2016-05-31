@@ -108,7 +108,18 @@ namespace Pharmacy
             int lastRouting = routingList.Count - 1;
             dataGridView1.Rows.Add();
 
-            dataGridView1.Rows[lastRouting].Cells[0].Value = routingList[lastRouting].getMedicineName();
+
+
+
+
+
+
+
+
+
+
+
+            dataGridView1.Rows[lastRouting].Cells[0].Value = routingDao.getRoutingContent(routingList[lastRouting]);
             dataGridView1.Rows[lastRouting].HeaderCell.Value = lastInsertedID;
 
 
@@ -142,6 +153,11 @@ namespace Pharmacy
 
 
         }
+
+
+
+
+        
 
 
     }

@@ -83,13 +83,13 @@
             this.dataGridView1.Location = new System.Drawing.Point(295, 12);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(193, 166);
+            this.dataGridView1.Size = new System.Drawing.Size(267, 166);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.Visible = false;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(494, 12);
+            this.button1.Location = new System.Drawing.Point(568, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 5;
@@ -100,7 +100,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(494, 155);
+            this.button2.Location = new System.Drawing.Point(568, 155);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 6;
@@ -131,7 +131,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(494, 41);
+            this.button5.Location = new System.Drawing.Point(568, 41);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 22);
             this.button5.TabIndex = 9;
@@ -146,7 +146,7 @@
             this.Medicine.Name = "Medicine";
             this.Medicine.ReadOnly = true;
             this.Medicine.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Medicine.Width = 150;
+            this.Medicine.Width = 250;
             // 
             // Send_sms
             // 
@@ -154,7 +154,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(574, 192);
+            this.ClientSize = new System.Drawing.Size(655, 192);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);

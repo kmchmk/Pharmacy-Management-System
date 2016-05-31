@@ -28,15 +28,14 @@ namespace Pharmacy
 
             foreach (Routing i in routingList)
             {
-                listBox1.Items.Add(i.getMedicineName());
+                listBox1.Items.Add(routingDao.getRoutingContent(i));
             }
-
-
-
-
-
-
         }
+
+
+
+
+
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {

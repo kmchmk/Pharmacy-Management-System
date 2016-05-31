@@ -149,7 +149,67 @@ namespace Pharmacy
         }
 
 
+        public string getRoutingContent(Routing i)
+        {
 
+            string content = "";
+            content = content + i.getMedicineName() + ",";
+
+            int beforeOrAfter = i.getBeforeOrAfter();
+
+
+            int how = i.getHow();
+            //int how - if not selected 0, if with meals 1, if per hours 2, if at a time 3
+            if (how == 1)
+            {
+                if (beforeOrAfter == 0)
+                {
+                    content = content + " with";
+                }
+                else if (beforeOrAfter == 1)
+                {
+                    content = content + " before";
+                }
+                else if (beforeOrAfter == 2)
+                {
+                    content = content + " after";
+                }
+                content = content + " meals ( ";
+
+
+
+                if (i.getBreakfast() == 1)
+                {
+                    content = content + "breakfast ";
+                }
+                if (i.getLunch() == 1)
+                {
+                    content = content + "lunch ";
+                }
+                if (i.getDinner() == 1)
+                {
+                    content = content + "dinner ";
+                }
+
+                content = content + ")";
+
+            }
+            else if (how == 2)
+            {
+                content = content + " per every " + i.getHours().ToString() + " hours";
+
+            }
+            else if (how == 3)
+            {
+                content = content + " at " + i.getTime().ToString();
+            }
+
+            if (how == 1 || how == 2)
+            {
+                content = content + " " + i.getTimes().ToString() + " times";
+            }
+            return content;
+        }
 
 
 

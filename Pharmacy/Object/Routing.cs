@@ -6,11 +6,11 @@ namespace Pharmacy
     {
         int customerID;
         string medicineName;
-        int how;
+        int how; //int how - if not selected 0, if with meals 1, if per hours 2, if at a time 3
         int breakfast;
         int lunch;
         int dinner;
-        int beforeOrAfter;
+        int beforeOrAfter;//if not checked 0, if before 1, if after 2
         int hours;
         int times;
         DateTime? time;
