@@ -192,7 +192,7 @@ namespace Pharmacy
         {
             if (listBox1.SelectedIndex == -1)
             {
-                MessageBox.Show("Select an item first!");
+                MessageBox.Show("Select an item first!", "Error");
                 return;
             }
             int row = dataGridView1.RowCount;
@@ -205,18 +205,13 @@ namespace Pharmacy
 
 
             comboBox1.Text = "1";
-            calculateTotal();
+            calculateTotal(sender, e);
 
         }
 
-        private void calculateTotal()
+        private void calculateTotal(object sender, EventArgs e)
         {
-            double sum = 0.0;
-            for (int i = 0; i < dataGridView1.Rows.Count; i++)
-            {
-                sum = sum + double.Parse(dataGridView1.Rows[i].Cells[2].Value.ToString());
-            }
-            label15.Text = sum.ToString() + " Rs.";
+
         }
 
 
@@ -237,41 +232,13 @@ namespace Pharmacy
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (listBox1.SelectedIndex == -1)
-            {
-                MessageBox.Show("Select an item first!");
-                return;
-            }
-
-
-            new AddProduct(tempSelectedProduct).ShowDialog();
-
-
-
-
-
-            refreshGUI(1);
+            button6_Click(sender, e);
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            if (listBox1.SelectedIndex == -1)
-            {
-                MessageBox.Show("Select an item first!");
-                return;
-            }
-            if (MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo) == DialogResult.No)
-            {
-                return;
-            }
-
-
-
-            productDao.deleteProduct(tempSelectedProduct);
-
-
-            refreshGUI(2);
+            button7_Click(sender, e);
         }
 
         private void button1_Click_4(object sender, EventArgs e)
@@ -400,11 +367,93 @@ namespace Pharmacy
 
         private void button4_Click(object sender, EventArgs e)
         {
+            Boolean selected = false;
             foreach (DataGridViewRow item in dataGridView1.SelectedRows)
             {
                 dataGridView1.Rows.Remove(item);
+                selected = true;
             }
-            calculateTotal();
+
+            if (selected)
+            {
+                calculateTotal(sender, e);
+            }
+            else
+            {
+                MessageBox.Show("Select a row", "Error");
+            }
+
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex == -1)
+            {
+                MessageBox.Show("Select an item first!", "Error");
+                return;
+            }
+
+
+            new AddProduct(tempSelectedProduct).ShowDialog();
+
+
+
+
+
+            refreshGUI(1);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex == -1)
+            {
+                MessageBox.Show("Select an item first!", "Error");
+                return;
+            }
+            if (MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                return;
+            }
+
+
+
+            productDao.deleteProduct(tempSelectedProduct);
+
+
+            refreshGUI(2);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            new AddProduct().ShowDialog();
+        }
+
+        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            new ViewCustomers().Show();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            new Send_sms().ShowDialog();
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            calculateTotal(sender, e);
+        }
+
+
+
     }
 }

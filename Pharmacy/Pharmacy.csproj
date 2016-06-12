@@ -57,6 +57,7 @@
     <Compile Include="DBConnection\dbConnection.cs" />
     <Compile Include="DBConnection\ProductDAO.cs" />
     <Compile Include="DBConnection\RoutingDAO.cs" />
+    <Compile Include="DBConnection\WebDAO.cs" />
     <Compile Include="GUI\AddProduct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +78,7 @@
     </Compile>
     <Compile Include="Object\Customer.cs" />
     <Compile Include="Object\Product.cs" />
+    <Compile Include="Object\QueryData.cs" />
     <Compile Include="Object\Routing.cs" />
     <Compile Include="GUI\Add_medicine_Routine.cs">
       <SubType>Form</SubType>

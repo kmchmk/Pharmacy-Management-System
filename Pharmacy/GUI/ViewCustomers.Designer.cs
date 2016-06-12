@@ -132,6 +132,8 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "ViewCustomers";
             this.Text = "ViewCustomers";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ViewCustomers_FormClosed);
+            this.Load += new System.EventHandler(this.ViewCustomers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

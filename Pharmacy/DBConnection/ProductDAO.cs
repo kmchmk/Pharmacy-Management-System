@@ -10,10 +10,11 @@ namespace Pharmacy
     class ProductDAO
     {
         MySqlConnection conn;
-
+        WebDAO webDao;
         public ProductDAO()
         {
             this.conn = new dbConnection().getConnection();
+            this.webDao = new WebDAO();
         }
 
         public List<Product> getProductList(string searchKey)
@@ -86,6 +87,7 @@ namespace Pharmacy
 
 
                 cmd.ExecuteNonQuery();
+                webDao.UpdateWebDatabase(cmd);
                 //System.Diagnostics.Debug.WriteLine("chanaa");
 
 
@@ -134,6 +136,7 @@ namespace Pharmacy
                 cmd.Parameters.AddWithValue("description", product.getDescription());
 
                 cmd.ExecuteNonQuery();
+                webDao.UpdateWebDatabase(cmd);
                 //System.Diagnostics.Debug.WriteLine("chanaa");
 
 
@@ -171,8 +174,8 @@ namespace Pharmacy
 
                 cmd.Parameters.AddWithValue("id", product.getID());
 
-
                 cmd.ExecuteNonQuery();
+                webDao.UpdateWebDatabase(cmd);
                 //System.Diagnostics.Debug.WriteLine("chanaa");
 
 

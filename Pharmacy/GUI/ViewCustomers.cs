@@ -115,5 +115,18 @@ namespace Pharmacy
             textBox1.Text = "";
             search(sender, e);
         }
+
+        private void ViewCustomers_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ViewCustomers_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (routingDetails != null)
+            {
+                routingDetails.Dispose();
+            }
+        }
     }
 }
