@@ -5,18 +5,19 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Pharmacy
 {
 
-    public partial class Send_sms : Form
+    public partial class RegisterCustomer : Form
     {
         RoutingDAO routingDao;
         CustomerDAO customerDao;
         int customerID;
-        public Send_sms()
+        public RegisterCustomer()
         {
 
             InitializeComponent();
@@ -59,10 +60,9 @@ namespace Pharmacy
                 MessageBox.Show("Enter a name");
                 return;
             }
-
-            if (phoneNumber == "")
+            if (!Regex.Match(phoneNumber, "^([0-9]{10})$").Success)
             {
-                MessageBox.Show("Enter a phone number");
+                MessageBox.Show("Enter a correct phone number");
                 return;
             }
 
@@ -96,7 +96,19 @@ namespace Pharmacy
 
 
 
+        public void setDataGridViewHeight()
+        {
 
+            var height = 30;
+            foreach (DataGridViewRow dr in dataGridView1.Rows)
+            {
+                height += dr.Height;
+            }
+
+            dataGridView1.Height = height;
+
+
+        }
 
         public void populateTable(int lastInsertedID)
         {
@@ -107,23 +119,11 @@ namespace Pharmacy
 
             int lastRouting = routingList.Count - 1;
             dataGridView1.Rows.Add();
-
-
-
-
-
-
-
-
-
-
-
-
             dataGridView1.Rows[lastRouting].Cells[0].Value = routingDao.getRoutingContent(routingList[lastRouting]);
             dataGridView1.Rows[lastRouting].HeaderCell.Value = lastInsertedID;
 
 
-
+            setDataGridViewHeight();
 
             //System.Diagnostics.Debug.WriteLine(lastInsertedID);
             // System.Diagnostics.Debug.WriteLine(dataGridView1.Rows[lastRouting].HeaderCell.Value);

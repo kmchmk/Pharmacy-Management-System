@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Net.NetworkInformation;
 using Telerivet.Client;
+using System.Threading;
 
 namespace Pharmacy
 {
@@ -19,13 +20,18 @@ namespace Pharmacy
 
         RoutingDAO routingDao;
         ProductDAO productDao;
+        WebDAO webDao;
         List<Product> productList;
         Product tempSelectedProduct;//this is always temporary. This is the selected product of the list
+
+
         public MainMenu()
         {
             InitializeComponent();
             this.routingDao = new RoutingDAO();
             this.productDao = new ProductDAO();
+            this.webDao = new WebDAO();
+            searchAndDisplay();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -35,7 +41,7 @@ namespace Pharmacy
 
         private void button2_Click(object sender, EventArgs e)
         {
-            new Send_sms().Show();
+            new RegisterCustomer().Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -45,7 +51,7 @@ namespace Pharmacy
 
         private void smsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new Send_sms().ShowDialog();
+            new RegisterCustomer().ShowDialog();
         }
 
 
@@ -95,6 +101,7 @@ namespace Pharmacy
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
+            refreshGUI(2);
             searchAndDisplay();
         }
 
@@ -128,7 +135,6 @@ namespace Pharmacy
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             setDetails();
-            //System.Diagnostics.Debug.WriteLine(listBox1.SelectedIndex);
         }
 
         private void label12_Click(object sender, EventArgs e)
@@ -211,13 +217,36 @@ namespace Pharmacy
 
         private void calculateTotal(object sender, EventArgs e)
         {
+            double sum = 0.00;
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                sum = sum + Double.Parse(dataGridView1.Rows[i].Cells[2].Value.ToString());
+            }
+
+            label15.Text = sum.ToString() + " Rs.";
+
+            double payment = 0.00;
+            Double.TryParse(textBox3.Text, out payment);
+
+            double balance = payment - sum;
+            if (balance < 0)
+            {
+                label18.Text = "More " + (-balance).ToString() + " Rs. needed.";
+            }
+            else
+            {
+                label18.Text = balance.ToString() + " Rs.";
+            }
+
+
+
 
         }
 
 
         private void registerCustomerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new Send_sms().ShowDialog();
+            new RegisterCustomer().ShowDialog();
         }
 
         private void addProductToolStripMenuItem_Click(object sender, EventArgs e)
@@ -243,103 +272,8 @@ namespace Pharmacy
 
         private void button1_Click_4(object sender, EventArgs e)
         {
+            webDao.UpdateWebDatabaseFromLocalatabase();
 
-
-            System.Diagnostics.Debug.WriteLine(DateTime.UtcNow.Date + new TimeSpan(7, 0, 0) > DateTime.UtcNow);
-
-            System.Diagnostics.Debug.WriteLine(DateTime.UtcNow);
-            System.Diagnostics.Debug.WriteLine(DateTime.Now);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            /*
-            Ping myPing = new Ping();
-            String host = "google.com";
-            byte[] buffer = new byte[32];
-            int timeout = 1000;
-            PingOptions pingOptions = new PingOptions();
-            PingReply reply = myPing.Send(host, timeout, buffer, pingOptions);
-            System.Diagnostics.Debug.WriteLine(reply.Status);
-            System.Diagnostics.Debug.WriteLine(IPStatus.Success);
-            if (reply.Status == IPStatus.Success)
-            {
-                System.Diagnostics.Debug.WriteLine("Internet is connected");
-                System.Diagnostics.Debug.WriteLine("");
-                System.Diagnostics.Debug.WriteLine("");
-            }
-
-            
-            
-            //string webConnStr = "SERVER =  sql301.byetcluster.com ; PORT = 3306 ; DATABASE= ltm_17966125_pharmacy ;  UID= ltm_17966125 ;PASSWORD= 123456789;";
-            string webConnStr = "Server = sql301.byetcluster.com; Database = ltm_17966125_pharmacy; User Id = ltm_17966125; Password = 123456789;";
-
-           // MySqlConnection webConn = new MySqlConnection(webConnStr);
-
-            MySqlConnection webConn = new MySqlConnection("Data Source = sql301.ultimatefreehost.in; Initial Catalog = ltm_17966125_pharmacy; User Id = ltm_17966125; Password = 123456789;");
-
-            
-
-            //MySqlConnection webConn = new dbConnection().getWebConnection();
-
-            try
-            {
-                webConn.Open();
-                //string query = "select id, code, productName, brand, rackNo, price, description from product where productName like @searchKey or code like @searchKey or brand like @searchKey";
-    /*          string query = "select * from product";
-                MySqlCommand cmd = new MySqlCommand(query, webConn);
-                //cmd.Parameters.AddWithValue("searchKey", "%" + searchKey + "%");
-                MySqlDataReader result = cmd.ExecuteReader();
-                int i = 0;
-                while (result.Read())
-                {
-                    i++;
-                   //productList.Add(new Product(result.GetInt32(0), result.GetString(1), result.GetString(2), result.GetString(3), result.GetInt32(4), result.GetDouble(5), result.GetString(6)));
-                }
-                System.Diagnostics.Debug.WriteLine(i);
-     
-      
-     
-     
-
-            }
-            catch (MySqlException ex)
-            {
-                System.Diagnostics.Debug.WriteLine("Something went wrong in getWebData method...");
-            }
-            finally
-            {
-                if (webConn != null)
-                {
-                    webConn.Close();
-                }
-            }
-
-
-
-
-
-
-
-           
-
-            
-
-
-*/
         }
 
 
@@ -365,6 +299,21 @@ namespace Pharmacy
             //testclass.sendSMS(apiKey, projectID, content, number);
         }
 
+        public void setDataGridViewHeight()
+        {
+
+            var height = 30;
+            foreach (DataGridViewRow dr in dataGridView1.Rows)
+            {
+                height += dr.Height;
+            }
+
+            dataGridView1.Height = height;
+
+
+        }
+
+
         private void button4_Click(object sender, EventArgs e)
         {
             Boolean selected = false;
@@ -373,6 +322,11 @@ namespace Pharmacy
                 dataGridView1.Rows.Remove(item);
                 selected = true;
             }
+            setDataGridViewHeight();
+
+
+
+
 
             if (selected)
             {
@@ -382,6 +336,8 @@ namespace Pharmacy
             {
                 MessageBox.Show("Select a row", "Error");
             }
+
+
 
         }
 
@@ -445,12 +401,34 @@ namespace Pharmacy
 
         private void button9_Click(object sender, EventArgs e)
         {
-            new Send_sms().ShowDialog();
+            new RegisterCustomer().ShowDialog();
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
             calculateTotal(sender, e);
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+
+            if (MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                return;
+            }
+            dataGridView1.Rows.Clear();
+            setDataGridViewHeight();
+            calculateTotal(sender, e);
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
 

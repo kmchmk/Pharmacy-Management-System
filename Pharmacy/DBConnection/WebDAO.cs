@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Threading;
 using MySql.Data.MySqlClient;
+using System.Windows.Forms;
 
 
 
@@ -14,13 +15,71 @@ namespace Pharmacy
     class WebDAO
     {
         MySqlConnection conn;
+
+        string url = "http://msquad.tk/updateDatabase.php";
+ 
         public WebDAO()
         {
             this.conn = new dbConnection().getConnection();
         }
+
+      //  public void setMainMenu(MainMenu mainMenu)
+
+
+        public void UpdateWebDatabaseFromLocalatabase()
+        {
+
+            new Thread(() =>
+            {
+                Thread.CurrentThread.IsBackground = true;
+
+                bool empty = true;
+                bool broke = false;
+                List<QueryData> queryDataList = getQueryDataList();
+                foreach (QueryData q in queryDataList)
+                {
+                    empty = false;
+
+                    try
+                    {
+                        string reply = "";
+                        using (WebClient client = new WebClient())
+                        {
+                            reply = client.UploadString(url, q.getQueryData());
+                        }
+                        if ("Done".Equals(reply))
+                        {
+                            deleteQueryData(q.getID());
+                        }
+                        else
+                        {
+                            MessageBox.Show("Couldn't update. Check internet connection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+                            broke = true;
+                            break;
+                        }
+                    }
+                    catch (WebException e)
+                    {
+                        MessageBox.Show("Couldn't update. Check internet connection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+                        broke = true;
+                        break;
+                    }
+                }
+                if (empty)
+                {
+                    MessageBox.Show("Nothing to update.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+                }
+                else if (!broke)
+                {
+                    MessageBox.Show("Updated successfully.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+                }
+            }).Start();
+
+        }
+
+
         public void UpdateWebDatabase(MySqlCommand cmd)
         {
-            string url = "http://msquad.tk/updateDatabase.php";
 
 
 
@@ -30,18 +89,13 @@ namespace Pharmacy
                 newQueryData = newQueryData.Replace("@" + p.ParameterName, "'" + p.Value.ToString() + "'");
             }
 
+
             new Thread(() =>
             {
                 Thread.CurrentThread.IsBackground = true;
 
 
-
-
-
                 List<QueryData> queryDataList = getQueryDataList();
-
-
-
                 bool empty = true;
                 bool broke = false;
                 foreach (QueryData q in queryDataList)
@@ -91,11 +145,11 @@ namespace Pharmacy
                     {
                         addQueryData(newQueryData);
                     }
+
+                    MessageBox.Show("Updated succesfully","Done", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+
                 }
             }).Start();
-
-
-
 
         }
 
@@ -114,6 +168,17 @@ namespace Pharmacy
                 cmd.Parameters.AddWithValue("queryData", queryData);
 
                 cmd.ExecuteNonQuery();
+
+
+
+
+
+                MessageBox.Show("Changes saved. Connect to the internet and update the website.","Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+
+
+
+
+
                 //System.Diagnostics.Debug.WriteLine("chanaa");
 
             }

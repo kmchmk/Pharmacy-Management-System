@@ -28,6 +28,7 @@ namespace Pharmacy
         {
             InitializeComponent();
             customerDao = new CustomerDAO();
+            search(null, null);
 
         }
 
@@ -63,15 +64,6 @@ namespace Pharmacy
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (routingDetails != null)
-            {
-                routingDetails.Dispose();
-            }
-            routingDetails = new RoutingDetails(customerList[e.RowIndex].getID());
-            routingDetails.SetDesktopLocation(this.Location.X + this.Size.Width, this.Location.Y);
-            routingDetails.Show();
-
-
 
 
 
@@ -84,18 +76,20 @@ namespace Pharmacy
 
         private void button2_Click(object sender, EventArgs e)
         {
-            new Send_sms().ShowDialog();
+            new RegisterCustomer().ShowDialog();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            closeRoutingDetails();
+
             if (dataGridView1.SelectedRows.Count < 1)//if no rows selected
             {
                 MessageBox.Show("Select a row");
                 return;
             }
 
-            else if (MessageBox.Show("Are you sure", "Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            else if (MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 foreach (DataGridViewRow item in dataGridView1.SelectedRows)//delete all selected rows
                 {
@@ -106,12 +100,13 @@ namespace Pharmacy
                 }
             }
 
-            
+
         }
 
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            closeRoutingDetails();
             textBox1.Text = "";
             search(sender, e);
         }
@@ -122,6 +117,29 @@ namespace Pharmacy
         }
 
         private void ViewCustomers_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            closeRoutingDetails();
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            closeRoutingDetails();
+
+            if (e.RowIndex >= 0)
+            {
+                routingDetails = new RoutingDetails(customerList[e.RowIndex].getID());
+                routingDetails.SetDesktopLocation(this.Location.X + this.Size.Width, this.Location.Y);
+                routingDetails.Show();
+            }
+
+
+        }
+        public void closeRoutingDetails()
         {
             if (routingDetails != null)
             {

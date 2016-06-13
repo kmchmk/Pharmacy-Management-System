@@ -21,11 +21,12 @@ namespace Pharmacy
         {
 
             List<Product> productList = new List<Product>();
-            if (searchKey != "")
+            if (1==1)//searchKey != "")               //if the search box is empty commented code will return nothing
             {
                 try
                 {
                     conn.Open();
+                    
                     string query = "select id, code, productName, brand, rackNo, price, description from product where productName like @searchKey or code like @searchKey or brand like @searchKey";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("searchKey", "%" + searchKey + "%");

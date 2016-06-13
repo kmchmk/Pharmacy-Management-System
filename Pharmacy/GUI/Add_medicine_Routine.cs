@@ -17,7 +17,7 @@ namespace Pharmacy
         RoutingDAO routingDao;
         CustomerDAO customerDao;
         DAO dao;
-        Send_sms send_sms;
+        RegisterCustomer registerCustomer;
 
 
         string apiKey = "17SdmOculXGRr0ggJ8A7gV9qbiL06Hq6";
@@ -28,13 +28,13 @@ namespace Pharmacy
 
 
 
-        public Add_medicine_Routine(Send_sms send_sms)
+        public Add_medicine_Routine(RegisterCustomer registerCustomer)
         {
             InitializeComponent();
             routingDao = new RoutingDAO();
             customerDao = new CustomerDAO();
             dao = new DAO();
-            this.send_sms = send_sms;
+            this.registerCustomer = registerCustomer;
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -186,11 +186,11 @@ namespace Pharmacy
                     {
 
                         string dateTime = ((Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds + (i * 3600 * hours) + 600).ToString();
-                        string content = send_sms.getCustomerName() + ",\nYou have to take " + medicineName + " now (" + DateTime.UtcNow.AddSeconds((i * 3600 * hours) + 600).AddHours(5.5) + ").\n-Pharmacy-";
+                        string content = registerCustomer.getCustomerName() + ",\nYou have to take " + medicineName + " now (" + DateTime.UtcNow.AddSeconds((i * 3600 * hours) + 600).AddHours(5.5) + ").\n-Pharmacy-";
 
 
 
-                        new TelerivetClass().schedule(apiKey, projectID, send_sms.getCustomerPhoneNumber(), dateTime, content);
+                        new TelerivetClass().schedule(apiKey, projectID, registerCustomer.getCustomerPhoneNumber(), dateTime, content);
                     }
 
                 }).Start();
@@ -208,23 +208,23 @@ namespace Pharmacy
                     Thread.CurrentThread.IsBackground = true;
                     string dateTime = (dateTimePicker1.Value.Subtract(new DateTime(1970, 1, 1, 5, 30, 0))).TotalSeconds.ToString();
 
-                    string content = send_sms.getCustomerName() + ",\nYou have to take " + medicineName + " now (" + time + ").\n-Pharmacy-";
+                    string content = registerCustomer.getCustomerName() + ",\nYou have to take " + medicineName + " now (" + time + ").\n-Pharmacy-";
 
 
 
-                    new TelerivetClass().schedule(apiKey, projectID, send_sms.getCustomerPhoneNumber(), dateTime, content);
+                    new TelerivetClass().schedule(apiKey, projectID, registerCustomer.getCustomerPhoneNumber(), dateTime, content);
                 }).Start();
 
 
             }
 
 
-            routingDao.addRouting(new Routing(send_sms.getCustomerID(), medicineName, how, breakfast, lunch, dinner, beforeOrAfter, hours, times, time));
+            routingDao.addRouting(new Routing(registerCustomer.getCustomerID(), medicineName, how, breakfast, lunch, dinner, beforeOrAfter, hours, times, time));
 
 
 
 
-            send_sms.populateTable(dao.getLastInsertedAutoIncrementedID());
+            registerCustomer.populateTable(dao.getLastInsertedAutoIncrementedID());
             this.Dispose();
 
 
@@ -238,9 +238,9 @@ namespace Pharmacy
                 Thread.CurrentThread.IsBackground = true;
 
                 string dateTime = ((Int32)((DateTime.UtcNow.Date.AddDays(days) + new TimeSpan(clock, 0, 0)).Subtract(new DateTime(1970, 1, 1, 5, 30, 0))).TotalSeconds).ToString();
-                string content = send_sms.getCustomerName() + ", You have to take " + medicineName + " now (" + (DateTime.UtcNow.Date.AddDays(days) + new TimeSpan(clock, 0, 0)) + ").\n-Pharmacy-";
+                string content = registerCustomer.getCustomerName() + ", You have to take " + medicineName + " now (" + (DateTime.UtcNow.Date.AddDays(days) + new TimeSpan(clock, 0, 0)) + ").\n-Pharmacy-";
                 System.Diagnostics.Debug.WriteLine(content);
-                new TelerivetClass().schedule(apiKey, projectID, send_sms.getCustomerPhoneNumber(), dateTime, content);
+                new TelerivetClass().schedule(apiKey, projectID, registerCustomer.getCustomerPhoneNumber(), dateTime, content);
 
             }).Start();
 
