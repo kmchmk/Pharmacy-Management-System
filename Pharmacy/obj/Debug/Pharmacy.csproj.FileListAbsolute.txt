@@ -42,4 +42,4 @@ C:\Users\Chanaka Maduranga\Dropbox\Documents\Visual Studio 2013\Projects\Pharmac
 C:\Users\Chanaka Maduranga\Dropbox\Documents\Visual Studio 2013\Projects\Pharmacy\Pharmacy\bin\Debug\Telerivet.Client.dll
 C:\Users\Chanaka Maduranga\Dropbox\Documents\Visual Studio 2013\Projects\Pharmacy\Pharmacy\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Chanaka Maduranga\Dropbox\Documents\Visual Studio 2013\Projects\Pharmacy\Pharmacy\obj\Debug\Pharmacy.RegisterCustomer.resources
-C:\Users\Chanaka Maduranga\Dropbox\Documents\Visual Studio 2013\Projects\Pharmacy\Pharmacy\obj\Debug\Pharmacy.GUI.Login.resources
+C:\Users\Chanaka Maduranga\Dropbox\Documents\Visual Studio 2013\Projects\Pharmacy\Pharmacy\obj\Debug\Pharmacy.Login.resources

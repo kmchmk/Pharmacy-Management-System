@@ -17,7 +17,6 @@ namespace Pharmacy
     public partial class MainMenu : Form
     {
 
-
         RoutingDAO routingDao;
         ProductDAO productDao;
         WebDAO webDao;
@@ -27,13 +26,31 @@ namespace Pharmacy
 
         public MainMenu()
         {
+
+            //uncomment them to login
+            
+            this.ShowInTaskbar = false;
             InitializeComponent();
             this.routingDao = new RoutingDAO();
             this.productDao = new ProductDAO();
             this.webDao = new WebDAO();
             searchAndDisplay();
+
+
+           new Login(this).Show();
+
+
+
+
+            this.Opacity = 0;
         }
 
+        public void startMainMenu()
+        {
+
+            this.ShowInTaskbar = true;
+            this.Opacity = 100;
+        }
         private void button1_Click(object sender, EventArgs e)
         {
 
@@ -290,13 +307,14 @@ namespace Pharmacy
 
         private void button2_Click_3(object sender, EventArgs e)
         {
-            string apiKey = "17SdmOculXGRr0ggJ8A7gV9qbiL06Hq6";
+       /*     string apiKey = "17SdmOculXGRr0ggJ8A7gV9qbiL06Hq6";
             string projectID = "PJfe487b37facfa08c";
             string number = "0717899366";
             string content = textBox1.Text;
 
             TelerivetClass testclass = new TelerivetClass();
             //testclass.sendSMS(apiKey, projectID, content, number);
+        * */
         }
 
         public void setDataGridViewHeight()
@@ -429,6 +447,11 @@ namespace Pharmacy
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            webDao.UpdateWebDatabaseFromLocalatabase();
         }
 
 

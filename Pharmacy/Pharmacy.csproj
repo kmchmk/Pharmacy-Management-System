@@ -57,6 +57,7 @@
     <Compile Include="DBConnection\dbConnection.cs" />
     <Compile Include="DBConnection\ProductDAO.cs" />
     <Compile Include="DBConnection\RoutingDAO.cs" />
+    <Compile Include="DBConnection\UserDAO.cs" />
     <Compile Include="DBConnection\WebDAO.cs" />
     <Compile Include="GUI\AddProduct.cs">
       <SubType>Form</SubType>
