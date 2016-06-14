@@ -29,7 +29,7 @@ namespace Pharmacy
 
             //uncomment them to login
             
-            this.ShowInTaskbar = false;
+           // this.ShowInTaskbar = false;
             InitializeComponent();
             this.routingDao = new RoutingDAO();
             this.productDao = new ProductDAO();
@@ -37,12 +37,12 @@ namespace Pharmacy
             searchAndDisplay();
 
 
-           new Login(this).Show();
+        //   new Login(this).Show();
 
 
 
 
-            this.Opacity = 0;
+         //   this.Opacity = 0;
         }
 
         public void startMainMenu()
@@ -452,6 +452,11 @@ namespace Pharmacy
         private void button10_Click(object sender, EventArgs e)
         {
             webDao.UpdateWebDatabaseFromLocalatabase();
+        }
+
+        private void label18_Click(object sender, EventArgs e)
+        {
+
         }
 
 
