@@ -123,20 +123,25 @@ namespace Pharmacy
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-
+            if (dataGridView1.SelectedRows.Count <= 1)
+            {
+                closeRoutingDetails();
+            }
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             closeRoutingDetails();
 
-            if (e.RowIndex >= 0)
+            if (dataGridView1.SelectedRows.Count <= 1)
             {
-                routingDetails = new RoutingDetails(customerList[e.RowIndex].getID());
-                routingDetails.SetDesktopLocation(this.Location.X + this.Size.Width, this.Location.Y);
-                routingDetails.Show();
+                if (e.RowIndex >= 0)
+                {
+                    routingDetails = new RoutingDetails(customerList[e.RowIndex].getID());
+                    routingDetails.SetDesktopLocation(this.Location.X + this.Size.Width, this.Location.Y);
+                    routingDetails.Show();
+                }
             }
-
 
         }
         public void closeRoutingDetails()

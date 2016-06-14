@@ -27,9 +27,9 @@ namespace Pharmacy
         public MainMenu()
         {
 
-            //uncomment them to login
-            
-           // this.ShowInTaskbar = false;
+
+
+             this.ShowInTaskbar = false;
             InitializeComponent();
             this.routingDao = new RoutingDAO();
             this.productDao = new ProductDAO();
@@ -37,12 +37,8 @@ namespace Pharmacy
             searchAndDisplay();
 
 
-        //   new Login(this).Show();
-
-
-
-
-         //   this.Opacity = 0;
+            new Login(this).Show();
+            this.Opacity = 0;
         }
 
         public void startMainMenu()
@@ -307,14 +303,14 @@ namespace Pharmacy
 
         private void button2_Click_3(object sender, EventArgs e)
         {
-       /*     string apiKey = "17SdmOculXGRr0ggJ8A7gV9qbiL06Hq6";
-            string projectID = "PJfe487b37facfa08c";
-            string number = "0717899366";
-            string content = textBox1.Text;
+            /*     string apiKey = "17SdmOculXGRr0ggJ8A7gV9qbiL06Hq6";
+                 string projectID = "PJfe487b37facfa08c";
+                 string number = "0717899366";
+                 string content = textBox1.Text;
 
-            TelerivetClass testclass = new TelerivetClass();
-            //testclass.sendSMS(apiKey, projectID, content, number);
-        * */
+                 TelerivetClass testclass = new TelerivetClass();
+                 //testclass.sendSMS(apiKey, projectID, content, number);
+             * */
         }
 
         public void setDataGridViewHeight()
@@ -414,7 +410,7 @@ namespace Pharmacy
 
         private void button8_Click(object sender, EventArgs e)
         {
-            new ViewCustomers().Show();
+            new ViewCustomers().ShowDialog();
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -430,7 +426,7 @@ namespace Pharmacy
         private void button11_Click(object sender, EventArgs e)
         {
 
-            if (MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo) == DialogResult.No)
+            if (MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
@@ -455,6 +451,11 @@ namespace Pharmacy
         }
 
         private void label18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
         {
 
         }
