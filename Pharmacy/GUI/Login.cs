@@ -150,7 +150,9 @@ namespace Pharmacy
 
         private void Login_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if(!old){
             Application.Exit();
+        }
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

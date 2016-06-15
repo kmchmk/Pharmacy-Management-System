@@ -127,6 +127,16 @@
     <value>True</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="button2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAD0AAABFCAYAAAD5E+5FAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        xAAADsQBlSsOGwAAAQVJREFUeF7lzzEOwzAMBEE93T93gFSmtTm49G2KKbigBHCt4zj/DkY7jHYY7TDa
+        YbTDaIfRDqMdRjuMdhjtMNphtMNoh9EOox1GO4x2GO0w2mG0w2iH0Q6jHcartbrQDXcc4bNWeN8W4GG7
+        7cYxPHjwdk9umENYbJNumUNYbJNumUNYbJNumUNYbJNumUNYbJNumUNYbJNumUNYbJNumUNYbJNumUNY
+        bJNumcNl8deDt3tywx7gUbvtxnv4RnjYCu+jeEUfvRndcIfRDqMdRjuMdhjtMNphtMNoh9EOox1GO4x2
+        GO0w2mG0w2iH0Q6jHUY7jHYY7TDaYbTDaIfRDqMdRrXj/ACPh2FhccUUpQAAAABJRU5ErkJggg==
+</value>
+  </data>
   <data name="button1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAD0AAABFCAIAAAB2cXkSAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -144,16 +154,6 @@
         wDvkNg28mwpSTQXJNPAOuU0FaVBBaqsgDSpIkFs1au8DSJOCWtL3otzqFPf39/ySiBHwJV5u2ACXs2yD
         46Lc3iK4OcMaOKvJXdPA+/95+g/bfzw+PiJNyN2L3L3I3Yvcvcjdi9y9yN2L3L3I3YvcXXg8/gJhIf/B
         6c26bwAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="button2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAD0AAABFCAYAAAD5E+5FAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        xAAADsQBlSsOGwAAAQVJREFUeF7lzzEOwzAMBEE93T93gFSmtTm49G2KKbigBHCt4zj/DkY7jHYY7TDa
-        YbTDaIfRDqMdRjuMdhjtMNphtMNoh9EOox1GO4x2GO0w2mG0w2iH0Q6jHcartbrQDXcc4bNWeN8W4GG7
-        7cYxPHjwdk9umENYbJNumUNYbJNumUNYbJNumUNYbJNumUNYbJNumUNYbJNumUNYbJNumUNYbJNumUNY
-        bJNumcNl8deDt3tywx7gUbvtxnv4RnjYCu+jeEUfvRndcIfRDqMdRjuMdhjtMNphtMNoh9EOox1GO4x2
-        GO0w2mG0w2iH0Q6jHUY7jHYY7TDaYbTDaIfRDqMdRrXj/ACPh2FhccUUpQAAAABJRU5ErkJggg==
 </value>
   </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
