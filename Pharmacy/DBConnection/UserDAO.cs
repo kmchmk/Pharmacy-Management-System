@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Encrypt;
 
 namespace Pharmacy
 {
@@ -12,14 +12,19 @@ namespace Pharmacy
     class UserDAO
     {
         MySqlConnection conn;
+        EncryptDecrypt encryptDecrypt;
+
         public UserDAO()
         {
             this.conn = new dbConnection().getConnection();
-
+            this.encryptDecrypt = new EncryptDecrypt();
         }
 
-        public bool isPasswordMatch(string username, string password){
-            
+        public bool isPasswordMatch(string username, string Unencryptedpassword)
+        {
+
+            string password = encryptDecrypt.passwordEncrypt(Unencryptedpassword,"keyisthekey");
+
             try
             {
 
@@ -30,13 +35,17 @@ namespace Pharmacy
 
                 cmd.Parameters.AddWithValue("username", username);
                 cmd.Parameters.AddWithValue("password", password);
+
                 MySqlDataReader result = cmd.ExecuteReader();
+
                 result.Read();
 
-                if(result.GetInt32(0) == 1){
+                if (result.GetInt32(0) == 1)
+                {
                     return true;
                 }
-                else {
+                else
+                {
                     return false;
                 }
                 //System.Diagnostics.Debug.WriteLine("chanaa");
@@ -46,7 +55,7 @@ namespace Pharmacy
             }
             catch (MySqlException ex)
             {
-                System.Diagnostics.Debug.WriteLine("Something went wrong in deleteProduct method...");
+                System.Diagnostics.Debug.WriteLine("Something went wrong in isPasswordMatch method...");
                 return false;
             }
             finally
@@ -61,7 +70,8 @@ namespace Pharmacy
 
 
 
-        public string getEmail(string username){
+        public string getEmail(string username)
+        {
             try
             {
 
@@ -113,7 +123,7 @@ namespace Pharmacy
                 MySqlDataReader result = cmd.ExecuteReader();
                 result.Read();
 
-                return result.GetString(0);
+                return encryptDecrypt.passwordDecrypt(result.GetString(0), "keyisthekey");
 
                 //System.Diagnostics.Debug.WriteLine("chanaa");
 
