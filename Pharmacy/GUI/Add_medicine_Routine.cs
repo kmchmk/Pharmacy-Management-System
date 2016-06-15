@@ -248,5 +248,10 @@ namespace Pharmacy
 
 
         }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -23,13 +23,15 @@ namespace Pharmacy
         List<Product> productList;
         Product tempSelectedProduct;//this is always temporary. This is the selected product of the list
 
+        string password;
+        string username;
 
         public MainMenu()
         {
 
 
 
-             this.ShowInTaskbar = false;
+            this.ShowInTaskbar = false;
             InitializeComponent();
             this.routingDao = new RoutingDAO();
             this.productDao = new ProductDAO();
@@ -37,15 +39,17 @@ namespace Pharmacy
             searchAndDisplay();
 
 
-            new Login(this).Show();
+            new Login(this,"","",0).Show();
             this.Opacity = 0;
         }
 
-        public void startMainMenu()
+        public void startMainMenu(string username,            string password)
         {
 
             this.ShowInTaskbar = true;
             this.Opacity = 100;
+            this.username = username;
+            this.password = password;
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -362,6 +366,9 @@ namespace Pharmacy
 
         private void button6_Click(object sender, EventArgs e)
         {
+
+
+
             if (listBox1.SelectedIndex == -1)
             {
                 MessageBox.Show("Select an item first!", "Error");
@@ -369,12 +376,20 @@ namespace Pharmacy
             }
 
 
+
+            new Login(this, username, password,1).Show();
+
+
+
+
+
+
+        }
+        public void returnFromEditPasswordAcception(){
+
+
+
             new AddProduct(tempSelectedProduct).ShowDialog();
-
-
-
-
-
             refreshGUI(1);
         }
 
@@ -385,6 +400,13 @@ namespace Pharmacy
                 MessageBox.Show("Select an item first!", "Error");
                 return;
             }
+
+
+            new Login(this, username, password,2).Show();
+        }
+        public void returnFromDeletePasswordAcception()
+        {
+
             if (MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo) == DialogResult.No)
             {
                 return;

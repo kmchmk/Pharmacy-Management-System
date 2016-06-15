@@ -16,12 +16,28 @@ namespace Pharmacy
     {
         UserDAO userDao;
         MainMenu mainMenu;
-        public Login(MainMenu mainMenu)
+        bool old = false;
+        int eOrD = 0; //edit 1, delete 2
+        string usernameFromMainMenu;
+        string passwordFromMainMenu;
+        public Login(MainMenu mainMenu, string usernameFromMainMenu, string passwordFromMainMenu, int eOrD)
         {
             InitializeComponent();
             this.userDao = new UserDAO();
             this.mainMenu = mainMenu;
 
+            this.usernameFromMainMenu = usernameFromMainMenu;
+            this.passwordFromMainMenu = passwordFromMainMenu;
+            this.eOrD = eOrD;
+
+            if (usernameFromMainMenu != "")
+            {
+                Console.WriteLine(usernameFromMainMenu);
+                textBox1.Text = usernameFromMainMenu;
+                textBox1.Enabled = false;
+                button1.Text = "Enter";
+                old = true;
+            }
 
 
 
@@ -40,11 +56,15 @@ namespace Pharmacy
 
         private void Login_Load(object sender, EventArgs e)
         {
-            textBox1.ForeColor = Color.Gray;
+            
             textBox2.ForeColor = Color.Gray;
-
-            textBox1.Text = "user name...";
             textBox2.Text = "password...";
+
+            if (!old)
+            {
+                textBox1.ForeColor = Color.Gray;
+                textBox1.Text = "user name...";
+            }
         }
 
         private void textBox1_Enter(object sender, EventArgs e)
@@ -90,17 +110,41 @@ namespace Pharmacy
             string username = textBox1.Text;
             string password = textBox2.Text;
 
-            if (userDao.isPasswordMatch(username, password))
+            if (old)
             {
-                this.Visible = false;
-                mainMenu.startMainMenu();
+                if (passwordFromMainMenu == password)
+                {
+                    if (eOrD == 1)
+                    {
+                        mainMenu.returnFromEditPasswordAcception();
+                    }
+                    else if (eOrD == 2)
+                    {
+                        mainMenu.returnFromDeletePasswordAcception();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Some error in password acception return function");
+                    }
+                }
                 this.Dispose();
             }
             else
             {
-                MessageBox.Show("Username or password is incorrect!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                new Login(mainMenu).Show();
-                this.Visible = false;
+
+
+                if (userDao.isPasswordMatch(username, password))
+                {
+                    this.Visible = false;
+                    mainMenu.startMainMenu(username, password);
+                    this.Dispose();
+                }
+                else
+                {
+                    MessageBox.Show("Username or password is incorrect!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    new Login(mainMenu, "", "",0).Show();
+                    this.Visible = false;
+                }
             }
         }
 
