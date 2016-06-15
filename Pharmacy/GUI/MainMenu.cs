@@ -482,6 +482,16 @@ namespace Pharmacy
 
         }
 
+        private void button1_Click_5(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void button2_Click_4(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
 
 
     }
