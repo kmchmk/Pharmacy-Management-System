@@ -74,9 +74,6 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.button14 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
@@ -635,9 +632,6 @@
             this.panel6.AutoSize = true;
             this.panel6.BackColor = System.Drawing.Color.Teal;
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel6.Controls.Add(this.button14);
-            this.panel6.Controls.Add(this.button13);
-            this.panel6.Controls.Add(this.button12);
             this.panel6.Controls.Add(this.button2);
             this.panel6.Controls.Add(this.button1);
             this.panel6.Controls.Add(this.button10);
@@ -647,39 +641,6 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(1305, 65);
             this.panel6.TabIndex = 3;
-            // 
-            // button14
-            // 
-            this.button14.Location = new System.Drawing.Point(705, 27);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(75, 23);
-            this.button14.TabIndex = 7;
-            this.button14.Text = "button14";
-            this.button14.UseVisualStyleBackColor = true;
-            this.button14.Visible = false;
-            this.button14.Click += new System.EventHandler(this.button14_Click);
-            // 
-            // button13
-            // 
-            this.button13.Location = new System.Drawing.Point(641, 25);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(17, 23);
-            this.button13.TabIndex = 6;
-            this.button13.Text = "button13";
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Visible = false;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
-            // 
-            // button12
-            // 
-            this.button12.Location = new System.Drawing.Point(617, 25);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(18, 23);
-            this.button12.TabIndex = 5;
-            this.button12.Text = "button12";
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Visible = false;
-            this.button12.Click += new System.EventHandler(this.button12_Click_1);
             // 
             // button2
             // 
@@ -854,9 +815,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.Button button14;
     }
 }
 

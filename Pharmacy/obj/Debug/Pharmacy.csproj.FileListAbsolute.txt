@@ -43,4 +43,3 @@ C:\Users\Chanaka Maduranga\Dropbox\Documents\Visual Studio 2013\Projects\Pharmac
 C:\Users\Chanaka Maduranga\Dropbox\Documents\Visual Studio 2013\Projects\Pharmacy\Pharmacy\obj\Debug\Pharmacy.csproj.GenerateResource.Cache
 C:\Users\Chanaka Maduranga\Dropbox\Documents\Visual Studio 2013\Projects\Pharmacy\Pharmacy\obj\Debug\Pharmacy.exe
 C:\Users\Chanaka Maduranga\Dropbox\Documents\Visual Studio 2013\Projects\Pharmacy\Pharmacy\obj\Debug\Pharmacy.pdb
-C:\Users\Chanaka Maduranga\Dropbox\Documents\Visual Studio 2013\Projects\Pharmacy\Pharmacy\obj\Debug\Pharmacy.csprojResolveAssemblyReference.cache
